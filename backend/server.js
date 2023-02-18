@@ -1,21 +1,28 @@
 require('dotenv').config();
 const express = require('express');
 
+const workoutRoutes = require('./routes/workouts')
+
 
 // express app
 const app = express();
 
 
-// add middelwear
+// add middleware
+
+app.use(express.json())
+
 app.use((req,res,next) => {
     console.log(req.path ,req.method);
     next()
 })
 
 // routes
-app.get('/', (req,res) => {
-    res.json({WelcomeMsg : "Welcome to Exercise Buddy App"})
-})
+
+app.use('/api/workouts/', workoutRoutes)
+
+
+
 
 
 
